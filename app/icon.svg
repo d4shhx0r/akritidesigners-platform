@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Architectural grid reference -->
+  <defs>
+    <linearGradient id="akritiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Blueprint Coordinate Frame -->
+  <rect x="2" y="2" width="96" height="96" rx="16" fill="#0B0D0F" stroke="#262D35" stroke-width="1.5" />
+  
+  <!-- Subtle Internal Grid Lines -->
+  <line x1="20" y1="2" x2="20" y2="98" stroke="#181D22" stroke-width="1" stroke-dasharray="2 3" />
+  <line x1="50" y1="2" x2="50" y2="98" stroke="#1E252D" stroke-width="1" stroke-dasharray="2 3" />
+  <line x1="80" y1="2" x2="80" y2="98" stroke="#181D22" stroke-width="1" stroke-dasharray="2 3" />
+  <line x1="2" y1="50" x2="98" y2="50" stroke="#1E252D" stroke-width="1" stroke-dasharray="2 3" />
+
+  <!-- Monogram A/D Structural Form -->
+  <!-- Left A-Rafter -->
+  <path d="M50 18 L24 78 H36 L50 44 L64 78 H76 L50 18 Z" fill="url(#akritiGrad)" />
+  
+  <!-- Right D-Curve Structural Chord -->
+  <path d="M50 26 C66 26 76 36 76 52 C76 68 66 78 50 78" stroke="#F8FAFC" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.9" />
+  
+  <!-- Precision Crossbeam (A-crossbar / D-tie) -->
+  <path d="M35 56 H65" stroke="url(#accentGrad)" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- Center Plumb-Line Coordinate Accent -->
+  <circle cx="50" cy="35" r="2.5" fill="#38BDF8" />
+  <circle cx="50" cy="56" r="2" fill="#F8FAFC" />
+  
+  <!-- Micro Corner Marks -->
+  <path d="M8 14 H14 M8 14 V8" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M92 86 H86 M92 86 V92" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" />
+</svg>

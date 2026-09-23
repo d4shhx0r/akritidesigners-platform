@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #0b0d0f;
+    --surface: #12161a;
+    --surface-light: #181d22;
+    --card: #15191e;
+    --card-hover: #1c2228;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+    --border-active: rgba(56, 189, 248, 0.4);
+    --foreground: #f8fafc;
+    --foreground-muted: #94a3b8;
+    --foreground-dim: #64748b;
+    --cyan-accent: #38bdf8;
+    --cyan-glow: rgba(56, 189, 248, 0.15);
+    --bronze-accent: #f59e0b;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+    selection-background-color: #0284c7;
+    selection-color: #ffffff;
+  }
+
+  ::selection {
+    background: #0284c7;
+    color: #ffffff;
+  }
+}
+
+/* Custom architectural utilities */
+.architectural-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.blueprint-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+}
+
+.isometric-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle architectural borders and corner ticks */
+.corner-ticks {
+  position: relative;
+}
+
+.corner-ticks::before,
+.corner-ticks::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: rgba(56, 189, 248, 0.6);
+  pointer-events: none;
+}
+
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0d0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252b32;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
