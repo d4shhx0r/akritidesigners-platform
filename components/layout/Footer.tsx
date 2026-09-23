@@ -137,10 +137,25 @@ export function Footer() {
         </div>
 
         {/* Bottom Technical Bar */}
-        <div className="mt-16 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>© {currentYear} {siteConfig.name}. All rights reserved.</span>
+        <div className="mt-16 pt-8 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <span>© {currentYear} {siteConfig.name}. All rights reserved.</span>
+            </div>
+            <span className="hidden sm:inline text-zinc-700">|</span>
+            <div className="flex items-center gap-1.5 text-zinc-400">
+              <span>Made by</span>
+              <a
+                href="https://www.linkedin.com/in/debashishbordoloi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 hover:text-sky-300 font-semibold underline underline-offset-4 decoration-sky-500/40 hover:decoration-sky-300 transition-colors inline-flex items-center gap-0.5"
+              >
+                <span>Debashish</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
