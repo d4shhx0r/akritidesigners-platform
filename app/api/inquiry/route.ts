@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getSupabaseClient } from "@/lib/supabase";
 
 const inquirySchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     const validData = result.data;
 
-    // Log securely in server logs (without leaking secrets)
+    // Log securely in server logs
     console.log("[INQUIRY_RECEIVED]", {
       timestamp: new Date().toISOString(),
       name: validData.name,
@@ -56,8 +57,32 @@ export async function POST(request: NextRequest) {
       size: validData.approximateSize,
     });
 
-    // Here a transactional email provider (Resend, SendGrid, Postmark) can be integrated via process.env
-    // When configured, it will dispatch to the studio email.
+    // Supabase Persistence (if configured via NEXT_PUBLIC_SUPABASE_URL & key)
+    const supabase = getSupabaseClient();
+    if (supabase) {
+      const { error: dbError } = await supabase.from("inquiries").insert([
+        {
+          name: validData.name,
+          email: validData.email,
+          phone: validData.phone,
+          project_type: validData.projectType,
+          location: validData.projectLocation,
+          approximate_size: validData.approximateSize || null,
+          services_required: validData.servicesRequired,
+          estimated_budget: validData.estimatedBudget || null,
+          message: validData.message,
+          created_at: new Date().toISOString(),
+          status: "new",
+        },
+      ]);
+
+      if (dbError) {
+        console.error("[SUPABASE_INSERT_ERROR]", dbError.message);
+        // Continue without failing the user response
+      } else {
+        console.log("[SUPABASE_INSERT_SUCCESS] Inquiry recorded in Supabase");
+      }
+    }
     
     return NextResponse.json(
       {
