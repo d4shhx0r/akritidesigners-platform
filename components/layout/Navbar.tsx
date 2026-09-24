@@ -102,10 +102,21 @@ export function Navbar() {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
+            <div className="hidden sm:flex items-center gap-3">
               <Button href="/contact" variant="primary" size="sm" withArrow>
                 Start a Project
               </Button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await fetch("/api/auth/logout", { method: "POST" });
+                  window.location.href = "/login";
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 hover:text-white hover:bg-zinc-800/80 border border-zinc-800 transition select-none cursor-pointer"
+                title="Log out of Akritidesigners"
+              >
+                <span>Exit</span>
+              </button>
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -160,6 +171,17 @@ export function Navbar() {
             >
               Start a Project
             </Button>
+
+            <button
+              type="button"
+              onClick={async () => {
+                await fetch("/api/auth/logout", { method: "POST" });
+                window.location.href = "/login";
+              }}
+              className="w-full py-2.5 px-4 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-white transition text-center"
+            >
+              LOG OUT // EXIT GATEWAY
+            </button>
 
             <div className="p-4 rounded-lg bg-zinc-900/50 border border-zinc-800/80 text-xs font-mono text-zinc-400 space-y-1">
               <div className="text-zinc-300 font-semibold">STUDIO INQUIRIES</div>
