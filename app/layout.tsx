@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { siteConfig } from "@/lib/data/site-config";
 
 const geistSans = Geist({
@@ -138,16 +137,8 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Global Navigation */}
-        <Navbar />
-
-        {/* Page Main Content */}
-        <main id="main-content" className="flex-1 w-full flex flex-col">
-          {children}
-        </main>
-
-        {/* Global Footer */}
-        <Footer />
+        {/* Global Site Shell with Authentication Gate & Isolated Login Layout */}
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

@@ -1,42 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyCredentials, generateSessionToken, getAuthorizedDefaultEmail, AUTH_COOKIE_NAME } from "@/lib/auth";
+import { verifyCredentials, generateSessionToken, AUTH_COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, password, isGoogle } = body;
+    const { email, password } = body;
 
-    let authenticatedEmail = "";
-
-    if (isGoogle) {
-      // Direct authenticated 1-click flow for the verified account
-      authenticatedEmail = getAuthorizedDefaultEmail();
-    } else {
-      if (!email || !password) {
-        return NextResponse.json(
-          { success: false, error: "Please enter both your email and password." },
-          { status: 400 }
-        );
-      }
-
-      const isValid = verifyCredentials(email, password);
-      if (!isValid) {
-        return NextResponse.json(
-          { success: false, error: "Invalid email or password. Please try again." },
-          { status: 401 }
-        );
-      }
-
-      authenticatedEmail = email.toLowerCase().trim();
+    if (!email || !password) {
+      return NextResponse.json(
+        { success: false, error: "Please enter both your email and password." },
+        { status: 400 }
+      );
     }
 
-    if (!authenticatedEmail) {
+    const isValid = verifyCredentials(email, password);
+    if (!isValid) {
       return NextResponse.json(
-        { success: false, error: "Authentication failed." },
+        { success: false, error: "Invalid email or password. Please try again." },
         { status: 401 }
       );
     }
 
+    const authenticatedEmail = email.toLowerCase().trim();
     const sessionToken = generateSessionToken(authenticatedEmail);
 
     const response = NextResponse.json(
